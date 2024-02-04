@@ -46,7 +46,9 @@ namespace BikeShopNET.Models
                     NormalizedEmail = "ADMIN@TEST.COM",
                     Email = "admin@test.com",
                     NormalizedUserName = "ADMIN@TEST.COM",
-                    PasswordHash = hasher.HashPassword(null, "Admin1!")
+                    PasswordHash = hasher.HashPassword(null, "Admin1!"),
+                    FirstName = "AdminTest",
+                    LastName = "AdminTest"
                 },
                 new AppUser
                 {
@@ -56,7 +58,9 @@ namespace BikeShopNET.Models
                     NormalizedEmail = "USER@TEST.COM",
                     Email = "user@test.com",
                     NormalizedUserName = "USER@TEST.COM",
-                    PasswordHash = hasher.HashPassword(null, "User1!")
+                    PasswordHash = hasher.HashPassword(null, "User1!"),
+                    FirstName = "UserTest",
+                    LastName = "UserTest"
                 }
             );
 

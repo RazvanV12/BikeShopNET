@@ -1,99 +1,113 @@
-﻿/*using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using BikeShopNET.Models; // Actualizează cu namespace-ul corect pentru modelele tale
 using BikeShopNET.ViewModels;// Actualizează cu namespace-ul corect pentru ViewModel-urile tale
 
-public class AccountController : Controller
+
+namespace BikeShopNET.Controllers
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
-
-    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AccountController : Controller
     {
-        _userManager = userManager;
-        _signInManager = signInManager;
-    }
 
-    // GET: /Account/Register
-    [HttpGet]
-    public IActionResult Register()
-    {
-        return View();
-    }
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly ILogger<AccountController> _logger;
 
-    // POST: /Account/Register
-    [HttpPost]
-    public async Task<IActionResult> Register(RegisterViewModel model)
-    {
-        if (ModelState.IsValid)
+        public AccountController(UserManager<AppUser> userManager,
+                               SignInManager<AppUser> signInManager,
+                               ILogger<AccountController> logger)
         {
-            var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-            var result = await _userManager.CreateAsync(user, model.Password);
-
-            if (result.Succeeded)
-            {
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("index", "home"); // Redirecționează utilizatorul unde dorești după înregistrare
-            }
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error.Description);
-            }
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _logger = logger;
         }
 
-        return View(model);
-    }
-
-    // GET: /Account/Login
-    [HttpGet]
-    public IActionResult Login(string returnUrl = null)
-    {
-        ViewData["ReturnUrl"] = returnUrl;
-        return View();
-    }
-
-    // POST: /Account/Login
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
-    {
-        ViewData["ReturnUrl"] = returnUrl;
-        if (ModelState.IsValid)
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> Register([FromBody] AccountUserDTO userdto)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-            if (result.Succeeded)
+            _logger.LogDebug("Running register account...");
+            if (!ModelState.IsValid)
             {
-                return RedirectToLocal(returnUrl);
+                _logger.LogError("Model is not valid");
+                return BadRequest(ModelState);
             }
-            else
+            try
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View(model);
+                AppUser user = new AppUser(userdto);
+                user.UserName = userdto.Email;
+                var result = await _userManager.CreateAsync(user, userdto.Password);
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(error.Code, error.Description);
+                    }
+                    _logger.LogWarning("Unauthorized access");
+                    return BadRequest(ModelState);
+                }
+
+                await _userManager.AddToRoleAsync(user, "User");
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return Problem("Something went wrong", statusCode: 500);
             }
         }
 
-        return View(model);
-    }
-
-    // POST: /Account/Logout
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Logout()
-    {
-        await _signInManager.SignOutAsync();
-        return RedirectToAction(nameof(HomeController.Index), "Home");
-    }
-
-    private IActionResult RedirectToLocal(string returnUrl)
-    {
-        if (Url.IsLocalUrl(returnUrl))
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserDTO logindto)
         {
-            return Redirect(returnUrl);
+            _logger.LogDebug("Executing login account...");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var result = await _signInManager.PasswordSignInAsync(
+                    logindto.Email, logindto.Password, false, false);
+
+                if (!result.Succeeded || User.Identity.IsAuthenticated)
+                {
+                    _logger.LogWarning("Unauthorized access");
+                    return Unauthorized(logindto);
+                }
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return Problem("Something went wrong", statusCode: 500);
+            }
         }
-        else
+
+        [HttpPost]
+        [Route("logout")]
+        public async Task<IActionResult> Logout()
         {
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            _logger.LogDebug("Running logoutaccount...");
+            try
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    await _signInManager.SignOutAsync();
+                    return Ok();
+                }
+                else
+                {
+                    _logger.LogWarning("Unauthorized access");
+                    return Unauthorized();
+                }
+            }
+            catch (Exception)
+            {
+                return Problem("Something went wrong", statusCode: 500);
+            }
         }
+
     }
 }
-*/

@@ -105,6 +105,7 @@ F:\BikeShop\BikeShopNET\BikeShopNET\bin\Debug\net8.0\Microsoft.OpenApi.dll
 F:\BikeShop\BikeShopNET\BikeShopNET\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 F:\BikeShop\BikeShopNET\BikeShopNET\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 F:\BikeShop\BikeShopNET\BikeShopNET\bin\Debug\net8.0\Mono.TextTemplating.dll
+F:\BikeShop\BikeShopNET\BikeShopNET\bin\Debug\net8.0\Newtonsoft.Json.dll
 F:\BikeShop\BikeShopNET\BikeShopNET\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 F:\BikeShop\BikeShopNET\BikeShopNET\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 F:\BikeShop\BikeShopNET\BikeShopNET\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
