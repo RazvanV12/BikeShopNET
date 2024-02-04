@@ -8,8 +8,8 @@ namespace BikeShopNET.Models
 {
     public class Order
     {
-        public Guid OrderId { get; set; }
-        public Guid UserId { get; set; }
+        public string OrderId { get; set; }
+        public string UserId { get; set; }
         public DateTime OrderDate { get; set; }
         public int TotalPrice { get; set; }
 

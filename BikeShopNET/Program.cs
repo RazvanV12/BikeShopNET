@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
 
 
 builder.Services.AddControllers();
@@ -18,6 +17,11 @@ builder.Services.AddDbContext<BikeShopContext>(options =>
 builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.User.RequireUniqueEmail = true)
    .AddRoles<IdentityRole>()
    .AddEntityFrameworkStores<BikeShopContext>();
+
+
+builder.Services.AddTransient<SeedData>();
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

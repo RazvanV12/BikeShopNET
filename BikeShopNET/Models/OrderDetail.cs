@@ -8,9 +8,9 @@ namespace BikeShopNET.Models
 {
     public class OrderDetail
     {
-        public Guid OrderDetailId { get; set; }
-        public Guid OrderId { get; set; }
-        public Guid ProductId { get; set; }
+        public string OrderDetailId { get; set; }
+        public string OrderId { get; set; }
+        public string ProductId { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
 

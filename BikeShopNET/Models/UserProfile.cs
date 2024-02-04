@@ -10,7 +10,7 @@
         public string City { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public virtual AppUser AppUser { get; set; }
     }
 }
