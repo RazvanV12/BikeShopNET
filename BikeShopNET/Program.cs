@@ -16,8 +16,8 @@ builder.Services.AddDbContext<BikeShopContext>(options =>
     options.UseSqlServer(bikeShopConnectionString));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.User.RequireUniqueEmail = true)
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<BikeShopContext>();
+   .AddRoles<IdentityRole>()
+   .AddEntityFrameworkStores<BikeShopContext>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

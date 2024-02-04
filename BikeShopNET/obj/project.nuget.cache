@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ig5AXqICpv3t66ulcH3QcnP8Nb13kU0Omj26jgfZmROnA63ayFeu+CzcVGDoDpYOOCh0lVH47Woqy6nTXMBkFw==",
+  "dgSpecHash": "Y/HKxydgR1Y1tYMC2zeDy+fK8Ym3+vNbBjXAKXYjjaQex/dw2d7C4x4RS8f1hkaPFO1R7lyx2D9/YsyiTsjhGQ==",
   "success": true,
-  "projectFilePath": "F:\\BikeShopNET\\BikeShopNET\\BikeShopNET.csproj",
+  "projectFilePath": "F:\\BikeShop\\BikeShopNET\\BikeShopNET\\BikeShopNET.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MyPC\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\MyPC\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

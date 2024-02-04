@@ -3586,11 +3586,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\BikeShopNET\\BikeShopNET\\BikeShopNET.csproj",
+      "projectUniqueName": "F:\\BikeShop\\BikeShopNET\\BikeShopNET\\BikeShopNET.csproj",
       "projectName": "BikeShopNET",
-      "projectPath": "F:\\BikeShopNET\\BikeShopNET\\BikeShopNET.csproj",
+      "projectPath": "F:\\BikeShop\\BikeShopNET\\BikeShopNET\\BikeShopNET.csproj",
       "packagesPath": "C:\\Users\\MyPC\\.nuget\\packages\\",
-      "outputPath": "F:\\BikeShopNET\\BikeShopNET\\obj\\",
+      "outputPath": "F:\\BikeShop\\BikeShopNET\\BikeShopNET\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
