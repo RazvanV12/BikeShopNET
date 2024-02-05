@@ -1,6 +1,10 @@
 using BikeShopNET.Models;
+using BikeShopNET.Services.AppUserService;
+using BikeShopNET.Repositories.UserRepository;
+using BikeShopNET.Repositories.GenericRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +24,14 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.User.Requ
 
 
 builder.Services.AddTransient<SeedData>();
+builder.Services.AddTransient<IAppUserRepository, AppUserRepository>();
+builder.Services.AddTransient<IAppUserService, AppUserService>();
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+});
+
 
 var app = builder.Build();
 
@@ -32,6 +44,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 // Run seeders
