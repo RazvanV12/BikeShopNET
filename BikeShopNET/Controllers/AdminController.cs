@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BikeShopNET.Services.AppUserService;
 using Microsoft.AspNetCore.Authorization;
+using BikeShopNET.Models;
 
 namespace BikeShopNET.Controllers
 {
@@ -21,6 +22,45 @@ namespace BikeShopNET.Controllers
         {
             var result = _appUserService.GetFullname(userId);
             return result;
+        }
+
+        [HttpDelete]
+        [Route("DeleteUser")]
+        //[
+        //
+        //Authorize(Policy = "RequireAdminRole")]
+        public void DeleteUser([FromBody] string userId)
+        {
+            _appUserService.DeleteUser(userId);
+        }
+
+        [HttpGet]
+        [Route("GetAllUsers")]
+        //[
+        //
+        //Authorize(Policy = "RequireAdminRole")]
+        public List<AppUser> GetAllUsers()
+        {
+            return _appUserService.GetAll();
+        }
+        [HttpGet]
+        [Route("GetAdminsWhoLiveInCity")]
+        //[
+        //
+        //Authorize(Policy = "RequireAdminRole")]
+        public List<AppUser> GetAdminsWhoLiveInCity(string City)
+        {
+            return _appUserService.GetAdminsWhoLiveInCity(City);
+        }
+
+        [HttpPost]
+        [Route("CreateProfile")]
+        //[
+        //
+        //Authorize(Policy = "RequireAdminRole")]
+        public void CreateProfile([FromBody] UserProfile userProfile)
+        {
+            _appUserService.CreateProfile(userProfile);
         }
     }
 }
