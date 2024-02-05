@@ -1,9 +1,10 @@
 using BikeShopNET.Models;
 using BikeShopNET.Services.AppUserService;
 using BikeShopNET.Repositories.UserRepository;
-using BikeShopNET.Repositories.GenericRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using BikeShopNET.Repositories.ProductRepository;
+using BikeShopNET.Services.ProductService;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.User.Requ
 builder.Services.AddTransient<SeedData>();
 builder.Services.AddTransient<IAppUserRepository, AppUserRepository>();
 builder.Services.AddTransient<IAppUserService, AppUserService>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization(options =>
 {
